@@ -80,11 +80,9 @@ submitBtn.addEventListener('click', function(event) {
 
     axios.post(url, form)
         .then(function(response) {
-            //handle success
-            console.log(response);
+            fillGender(response.data);
         })
         .catch(function(response) {
-            //handle error
             console.log(response);
         });
 })
@@ -95,20 +93,14 @@ function imageUploadedEvent(img) {
     encodeImageFileAsURL(img);
 }
 
-function imageUploaded() {
 
 
-
-    // let base64 = localStorage.getItem('base64');
-    // let imgElem = document.getElementById('image');
-    // console.log(imgElem);
-    // imgElem.style.display = 'inline-block'
-    // imgElem.src = img;
-    // imgElem.style.maxWidth = '500px'
-    // document.getElementById('fileUploaded').style.display = 'none'
-
-
+function fillGender(gender) {
+    let elem = document.querySelector('#gender');
+    elem.innerHTML += gender;
+    elem.style.display = 'block';
 }
+
 
 
 function getResponseFromApi() {
@@ -124,76 +116,16 @@ function getResponseFromApi() {
 
 
 function postData(url, data) {
-    localStorage.setItem("salam", url + " " + data)
-
     axios.post(url, data)
         .then(function(response) {
-            //handle success
             console.log(response);
         })
         .catch(function(response) {
-            //handle error
             console.log(response);
         });
 
-
-    // const response = await fetch(url, {
-    //     method: 'POST',
-    //     mode: 'no-cors',
-    //     cache: 'no-cache',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     redirect: 'follow',
-    //     referrerPolicy: 'no-referrer',
-    //     body: ""
-    // });
-    // console.log(response)
-    // var post = await response.text();
-    // return post;
-
-
-    // fetch(url, {
-    //         method: 'POST',
-    //         headers: {
-
-    //         },
-    //         body: data
-    //     })
-    //     .then(function(data) {
-    //         console.log('Request succeeded with JSON response', data.json());
-    //     })
-    //     .catch(function(error) {
-    //         console.log('Request failed', error);
-    //     });
 }
 
-
-
-
-
-function getJsonForRequest(base64) {
-    let json = {
-        "api_key": "d45fd466-51e2-4701-8da8-04351c872236",
-        "file_uri": `${url}`,
-        "detection_flags": "basicpoints,propoints,classifiers,content",
-        "recognize_targets": [
-            "all@mynamespace"
-        ],
-        "original_filename": "sample.png"
-    }
-    return json
-}
-
-
-function fillInfo() {
-    console.log("info filled");
-}
-
-
-function readURL(img) {
-    encodeImageFileAsURL(img);
-}
 
 
 

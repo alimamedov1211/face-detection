@@ -97,15 +97,7 @@ function imageUploadedEvent(img) {
 
 function imageUploaded() {
 
-    let imgElem = document.getElementById('image');
 
-    imgElem.style.display = 'inline-block'
-
-    let base64 = localStorage.getItem('base64')
-    imgElem.src = base64;
-    imgElem.style.maxWidth = '500px'
-    document.getElementById('fileUploaded').style.display = 'none'
-    getResponseFromApi();
 
     // let base64 = localStorage.getItem('base64');
     // let imgElem = document.getElementById('image');
@@ -122,7 +114,6 @@ function imageUploaded() {
 function getResponseFromApi() {
 
     let result;
-    // let json = getJsonForRequest(base64);
     let convertedImage = document.getElementById('convertedImage').files[0];
     let form = new FormData();
     form.append('image', convertedImage);
@@ -208,20 +199,18 @@ function readURL(img) {
 
 
 function encodeImageFileAsURL(element) {
+    let imgElem = document.getElementById('image');
+    imgElem.style.display = 'inline-block'
+    let base64 = localStorage.getItem('base64')
+    imgElem.style.maxWidth = '500px'
+    document.getElementById('fileUploaded').style.display = 'none'
     bool = true;
     let file = element.files[0];
     let reader = new FileReader();
     reader.onloadend = function() {
         localStorage.setItem('base64', reader.result)
+        imgElem.src = reader.result;
     }
     reader.readAsDataURL(file);
+    // getResponseFromApi();
 }
-
-
-// function f() {
-//     fetch('https://www.betafaceapi.com/api/v2/face?api_key=d45fd466-51e2-4701-8da8-04351c872236&face_uuid=baf46c5b-47ed-11e8-a034-0cc47a6c4dbd')
-//         .then(response => response.json())
-//         .then(data =>
-//             console.log(data)
-//         )
-// }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script defer src="face-api.min.js"></script>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header-area header-sticky">
+        <h1 class="h1tag">Face Recognition</h1>
+    </header>
+    <main>
+        <div class="content">
+            <div class="container">
+                <div class="leftSide" id="videoContainer">
+                    <video id="video" autoplay muted width="520" height="360"></video>
+                    <div id='webcamBtn' class="startBtn main-btn btn" onclick="startWebCam()">Click to open webcam!</div>
+                </div>
+                <div class="middle">
+                    OR
+                </div>
+                <div class="rigthSide">
+                    <img src="#" alt="image" id="image">
+                    <p id="race">You are : </p>
+                    <div class="file-upload">
+                        <button class="file-upload-btn" type="button" id="submitBtn">Search Image</button>
+
+                        <div class="image-upload-wrap" id="fileUploaded">
+                            <input class="file-upload-input" id="convertedImage" onchange="imageUploadedEvent(this)" type='file' accept="image/png,image/gif,image/jpeg" id="urlWritten">
+                            <div class="drag-text">
+                                <h3>Upload Image</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</body>
+
+</html>

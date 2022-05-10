@@ -1,0 +1,9 @@
+{
+    "api_key": "d45fd466-51e2-4701-8da8-04351c872236",
+    "file_uri": "https://ichef.bbci.co.uk/news/976/cpsprodpb/A6E8/production/_119482724_gettyimages-1327650091.jpg",
+    "detection_flags": "basicpoints,propoints,classifiers,content",
+    "recognize_targets": [
+        "all@mynamespace"
+    ],
+    "original_filename": "sample.png"
+}

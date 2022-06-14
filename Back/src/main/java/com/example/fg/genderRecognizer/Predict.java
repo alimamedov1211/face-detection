@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @Service
 public class Predict {
-    public String generateResult(MultipartFile mainPhoto) throws IOException {
+    public Result generateResult(MultipartFile mainPhoto) throws IOException {
 
         nu.pattern.OpenCV.loadLocally();
 
@@ -42,29 +42,33 @@ public class Predict {
 
         //experience file
         weightedStandardPixelTrainer.load("src/main/resources/knowledge/Knowledge.log");
-
-        String result = "no Face";
+        Result result1 = new Result();
+        result1.setGender("No face");
+        result1.setAccuracy(0);
 
         int faceNo = 1;
         for (Mat face : faces) {
-
-            int prediction = weightedStandardPixelTrainer.predict(face);
+            Result result = weightedStandardPixelTrainer.predict(face);
+            result.setGender("No face");
+            int prediction = result.getId();
             if (prediction == -1) {
                 System.out.println("I think " + faceNo + " is not a face.");
                 Imgcodecs.imwrite("src/main/resources/sample/" + faceNo + "_noface.jpg", face);
             } else if (prediction == 0) {
                 System.out.println("I think " + faceNo + " is a female.");
-                result = "female";
+                result.setGender("female");
                 Imgcodecs.imwrite("src/main/resources/sample/" + faceNo + "_female.jpg", face);
             } else {
                 System.out.println("I think " + faceNo + " is a male.");
-                result = "male";
+                result.setGender("male");
                 Imgcodecs.imwrite("src/main/resources/sample/" + faceNo + "_male.jpg", face);
             }
 
             faceNo++;
+            result1 = result;
         }
         System.out.println("Operation Successful!!!");
-        return result;
+
+        return result1;
     }
 }

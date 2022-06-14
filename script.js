@@ -97,7 +97,7 @@ function imageUploadedEvent(img) {
 
 function fillGender(gender) {
     let elem = document.querySelector('#gender');
-    elem.innerHTML += gender;
+    elem.innerHTML += gender.gender + `( accuracy:${gender.accuracy})`;
     elem.style.display = 'block';
 }
 

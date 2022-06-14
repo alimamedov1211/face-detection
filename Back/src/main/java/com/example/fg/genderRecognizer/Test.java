@@ -36,7 +36,7 @@ public class Test {
                 String imageFilePath = file.getAbsolutePath();
                 Mat mat = Imgcodecs.imread(imageFilePath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
 
-                int prediction = weightedStandardPixelTrainer.predict(mat);
+                int prediction = weightedStandardPixelTrainer.predict(mat).getId();
 
                 if (prediction == id) {
                     right++;

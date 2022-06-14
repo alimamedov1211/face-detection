@@ -6,6 +6,8 @@
 package com.example.fg.genderRecognizer.weightedPixel;
 
 import java.io.*;
+
+import com.example.fg.genderRecognizer.Result;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -297,7 +299,8 @@ public class WeightedStandardPixelTrainer {
 	 * @param matSample
 	 * @return
 	 */
-	public int predict(Mat matSample){
+	public Result predict(Mat matSample){
+		Result result = new Result();
 		int id = 0;
 		float similarity = 0;
 		
@@ -310,6 +313,7 @@ public class WeightedStandardPixelTrainer {
 					compareMatDif(weightedStandardImage.getStandardImages(i), matSample);
 			
 			//System.out.println(currentSimilarity);	///test
+			result.setAccuracy(currentSimilarity);
 			
 			if(currentSimilarity > similarity){
 				similarity = currentSimilarity;
@@ -318,10 +322,11 @@ public class WeightedStandardPixelTrainer {
 		}
 		
 		if(similarity<20){	//if image is not recognized
-			return -1;
+			result.setId(-1);
+			return result;
 		}
-		
-		return id;
+		result.setId(id);
+		return result;
 	}
 	
 	/**
@@ -499,7 +504,7 @@ public class WeightedStandardPixelTrainer {
 		String imageFilePath = "C:\\Users\\admin\\Desktop\\1.jpg";
 		Mat mat = Imgcodecs.imread(imageFilePath, Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
 		
-		int prediction = weightedStandardPixelTrainer.predict(mat);
+		int prediction = weightedStandardPixelTrainer.predict(mat).getId();
 		System.out.println("Prediction is: " + prediction);
 		
 		
